@@ -1,0 +1,27 @@
+{
+  "name": "scrapin-node",
+  "version": "1.0.0",
+  "description": "https://cheerio.js.org/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nach131/scrapin-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nach131/scrapin-node/issues"
+  },
+  "homepage": "https://github.com/nach131/scrapin-node#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "fs-extra": "^9.1.0",
+    "isomorphic-fetch": "^3.0.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
