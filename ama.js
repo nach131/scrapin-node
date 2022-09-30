@@ -1,13 +1,13 @@
 const cheerio = require('cheerio')
 const request = require('request-promise')
 const fs = require('fs-extra')
-const { linkSync } = require('fs-extra')
 
 const writeStream = fs.createWriteStream('toma.txt')
 
-async function init() {
+async function init () {
   const $ = await request({
-    uri: 'https://www.amateri.com/es/album/2544876/fajn-dopoledne-p/',
+    // uri: 'https://www.amateri.com/es/album/2544876/fajn-dopoledne-p/',
+    uri: 'https://www.amateri.com/es/album/2717124/pink',
     transform: body => cheerio.load(body)
   })
 
@@ -21,11 +21,8 @@ async function init() {
     writeStream.write(`${img2}\n`)
   })
 
-
-
-
-
-
 }
 
 init()
+
+// wget --user-agent="Mozilla" -i toma.txt
