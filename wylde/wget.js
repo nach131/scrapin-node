@@ -1,24 +1,31 @@
 var axios = require('axios');
 const cheerio = require('cheerio')
 const fs = require('fs-extra')
+require('dotenv').config()
 
 const writeStream = fs.createWriteStream('wyylde.txt')
 
-const USER = 5676546
-const ALBUM = 1239122139
+const USER = 5781651
+const ALBUM = 1239101629
 
 var config = {
 	method: 'get',
-	// https://www.wyylde.com/es-es/mediacenter/user/4705380/album/1238579448
 
 	url: `https://www.wyylde.com/rest/mc/${USER}/album/${ALBUM}`,
-	// url: `https://www.wyylde.com/rest/mc/${USER}/album/${ALBUM}?nocache=1664520045974`,
+
+	//======================PORTADA============================================
+
+	// url: `https://www.wyylde.com/rest/mc/${USER}/video`,
+
+	// url: `https://www.wyylde.com/rest/mc/${USER}/album/0`,
+
+	//======================ORIGINAL===========================================
 	// url: 'https://www.wyylde.com/rest/mc/4705380/album/1238579448?nocache=1664520045974&version=4.1.0',
 	headers: {
 		'authority': 'www.wyylde.com',
 		'accept': 'application/json, text/plain, */*',
 		'accept-language': 'es-ES,es;q=0.9',
-		'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjcmVhdGV0bSI6MTY1OTM4NzM2MSwiX19pZCI6IjQ3NzE1MDMiLCJfX25hbWUiOiJzb3BoaWVibG9uZGUiLCJfX3N0YXRlcyI6W10sInBhc3N3b3JkX3VwZGF0ZWQiOnsicGFzc3dvcmRfdXBkYXRlZF9kdCI6bnVsbH0sInJlZnJlc2h0bSI6MTY2NDUxOTk2MywidXBkYXRldG0iOjE2NjQ1MTk5NjN9.AquVNALb21NV1032LZoD4nlmxvbl4vztnKmpDD5Zo-o',
+		'authorization': process.env.SECRET_KEY,
 		'cache-control': 'no-cache',
 		'cookie': 'session_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjcmVhdGV0bSI6MTY1OTM4NzM2MSwiX19pZCI6IjQ3NzE1MDMiLCJfX25hbWUiOiJzb3BoaWVibG9uZGUiLCJfX3N0YXRlcyI6W10sInBhc3N3b3JkX3VwZGF0ZWQiOnsicGFzc3dvcmRfdXBkYXRlZF9kdCI6bnVsbH19.8RpVxON_ZZB5QBxHz-NchYv7ffyeGxmCYN_xIZ5ALeU; _scid=960786c6-6352-48e0-9e43-827cf2d74f5c; AeFirst63072a4ce188f131d6d1c7fe=1661941932360; _gid=GA1.2.2071736144.1662827882; PAPVisitorId=GO3GltyshfLWJ7jVfqR8ZWHCoprJSJpI; PAPVisitorId=GO3GltyshfLWJ7jVfqR8ZWHCoprJSJpI; query_string=%7B%22travelId%22%3A%22cbff8000-57e5-11ed-a692-3b54edbb1dba%22%7D; ajs_user_id=4771503; ajs_anonymous_id=1ebb4539-247f-4627-b170-3badf48cb111; __stripe_mid=432c9f06-e802-4f46-8e9a-ef3ddaaaa960fbc57d; _ga=GA1.2.1304171703.1661466083; _gat_UA-173595-23=1; AWSALB=+RXZ5xNuJmALNp8J+i0tURF1zW5tCVspisdYDeVjzFjFrzwAaXO/e2owjwiOhDgUcw1JLea1luERKM5Om6Iabmqw4hGkB6QrOA03B5aYIkqEGEx4ZhSD8oPQEu+z; _ga_VWPKMML4YS=GS1.1.1664519304.215.1.1664520045.0.0.0; AWSALB=Kaj2R8Q+gHhcGiLB9+k5fUMDQTDCq106GXu8Dwii8TSKcljDieZPUaeYNVP0KjPP8iyQHmBlFuYdYgxSMtEr9pP3Qrg26hspfM8OX1vxkoOMLNH+8PcuZ7DYL0JY; AWSALBCORS=Kaj2R8Q+gHhcGiLB9+k5fUMDQTDCq106GXu8Dwii8TSKcljDieZPUaeYNVP0KjPP8iyQHmBlFuYdYgxSMtEr9pP3Qrg26hspfM8OX1vxkoOMLNH+8PcuZ7DYL0JY',
 		'pragma': 'no-cache',
@@ -36,15 +43,29 @@ var config = {
 axios(config)
 	.then(function (res) {
 
-		// console.log(res.data.data.pictures)
+		// console.log(res.data.data.videos)
 		const pictures = res.data.data.pictures
-		pictures.map(items => {
-			const full = items.full
+		const video = res.data.data.videos
 
-			console.log(full)
-			writeStream.write(`${full}\n`)
-		})
-		// console.log(JSON.stringify(res.data));
+		if (pictures) {
+			pictures.map(items => {
+				const full = items.full
+
+				// const after = full.split('?')[0]
+
+				console.log(full)
+				writeStream.write(`${full}\n`)
+			})
+		}
+		else if (video) {
+			video.map(items => {
+				const play = items.play
+				const after = play.split('?')[0]
+
+				console.log(after)
+				writeStream.write(`${after}\n`)
+			})
+		}
 	})
 	.catch(function (error) {
 		console.log(error);
