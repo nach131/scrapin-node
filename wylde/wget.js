@@ -5,17 +5,20 @@ require('dotenv').config()
 
 const writeStream = fs.createWriteStream('wyylde.txt')
 
-const USER = 5781651
-const ALBUM = 1239101629
+// 2670144
+// 4277974
+
+const USER = 112867
+// const ALBUM = 1237541967
 
 var config = {
 	method: 'get',
 
-	url: `https://www.wyylde.com/rest/mc/${USER}/album/${ALBUM}`,
+	// url: `https://www.wyylde.com/rest/mc/${USER}/album/${ALBUM}`,
 
 	//======================PORTADA============================================
 
-	// url: `https://www.wyylde.com/rest/mc/${USER}/video`,
+	url: `https://www.wyylde.com/rest/mc/${USER}/video`,
 
 	// url: `https://www.wyylde.com/rest/mc/${USER}/album/0`,
 
@@ -38,7 +41,7 @@ var config = {
 		'x-device': 'desktop',
 		'x-version': '1664363116'
 	}
-};
+}
 
 axios(config)
 	.then(function (res) {
@@ -60,10 +63,12 @@ axios(config)
 		else if (video) {
 			video.map(items => {
 				const play = items.play
-				const after = play.split('?')[0]
 
-				console.log(after)
-				writeStream.write(`${after}\n`)
+				if (play) {
+					const after = play.split('?')[0]
+					console.log(after)
+					writeStream.write(`${after}\n`)
+				}
 			})
 		}
 	})
