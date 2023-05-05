@@ -1,3 +1,4 @@
+const USER =617691
 var axios = require('axios');
 const cheerio = require('cheerio')
 const fs = require('fs-extra')
@@ -8,8 +9,7 @@ const writeStream = fs.createWriteStream('wyylde.txt')
 // 2670144
 // 4277974
 
-const USER = 112867
-// const ALBUM = 1237541967
+const ALBUM = 1239135593
 
 var config = {
 	method: 'get',

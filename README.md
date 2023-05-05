@@ -10,4 +10,4 @@ npm i cheerio request request-promise
 
 http://toscrape.com/
 
-wget --user-agent="Mozilla" -i toma.txt
+wget --user-agent="Mozilla" -i wyylde.txt
