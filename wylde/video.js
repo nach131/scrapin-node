@@ -1,4 +1,5 @@
-const USER =617691
+const USER = process.argv[2];
+
 var axios = require('axios');
 const cheerio = require('cheerio')
 const fs = require('fs-extra')

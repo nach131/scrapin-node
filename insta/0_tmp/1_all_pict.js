@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 
-const userName = 'dreamy_girl2021'
+const userName = 'KryssRockz'
 
 const downloadImage = async (url, path) => {
 	const response = await axios({
