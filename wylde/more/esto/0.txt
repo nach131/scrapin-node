@@ -1,0 +1,19 @@
+curl 'https://www.instagram.com/api/v1/feed/user/anii_valram/username/?count=12' \
+  -H 'authority: www.instagram.com' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-ES,es;q=0.6' \
+  -H 'cache-control: no-cache' \
+  -H 'cookie: mid=Y90x1AAEAAGhPdBSi6h-PmP1Zgv8; ig_did=969410AC-6060-4DEA-B485-6E4667D4A2B1; datr=mxXxY2eFpgIOelyEw4jVATbp; ds_user_id=59200750713; csrftoken=HosanfpPsT5cvvjfx8lTc3rzbZvwXvKa; shbid="2480\05459200750713\0541718387855:01f75529edc4b8c897ad0915d18e6028b091aea21f7e51dfa81a8e183c308db05a3c44f3"; shbts="1686851855\05459200750713\0541718387855:01f79d3bc5da72a0dbd4f290bca8bac85c505a1457d55a4ea8a94ccc98990225b3e96643"; sessionid=59200750713%3AQBZT9bQDOW4muN%3A15%3AAYeYsX60_QmFyW2IFOWhN20Qg2O4D-lgBcN6LLgvYvg; dpr=2; rur="CLN\05459200750713\0541718532595:01f722dfda39021edc14968acfcf69e27c2c4df3ffedbe0b586380a65679c1e2456c3648"' \
+  -H 'pragma: no-cache' \
+  -H 'referer: https://www.instagram.com/anii_valram/' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-gpc: 1' \
+  -H 'user-agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36' \
+  -H 'x-asbd-id: 129477' \
+  -H 'x-csrftoken: HosanfpPsT5cvvjfx8lTc3rzbZvwXvKa' \
+  -H 'x-ig-app-id: 1217981644879628' \
+  -H 'x-ig-www-claim: hmac.AR3gq4qvPq_uJ-zEKc1CKaRv4GtmoX1_0rcIgyFqh-Ta7SM5' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --compressed

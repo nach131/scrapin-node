@@ -1,0 +1,6 @@
+
+imagen
+data.user.result.timeline_v2.timeline.instructions[0].entries[2].content.itemContent.tweet_results.result.legacy.extended_entities.media[0].media_url_https
+
+video
+data.user.result.timeline_v2.timeline.instructions[0].entries[2].content.itemContent.tweet_results.result.legacy.extended_entities.media[0].video_info.variants[3].url

@@ -8,16 +8,14 @@ require('dotenv').config()
 
 // const writeStream = fs.createWriteStream('wyylde.txt')
 
-// 2670144
-// 4277974
-// 2508875
-// 186563
-// 31087
-// 1959181
-// 1918771
+// 
 // 1964109
 // 2174309
 // 155922
+
+// 1918771
+// 1959181
+// 2508875
 
 const headers = {
 	'authority': 'www.wyylde.com',
@@ -39,7 +37,6 @@ const headers = {
 	'x-device': 'desktop',
 	'x-version': '1682423351'
 }
-
 
 var axios = Promise.promisifyAll(require('axios'))
 
@@ -66,7 +63,6 @@ const albums = axios(config)
 		console.log("Error: Axios", error);
 	});
 
-// const albums = require('./wyylde.json')
 
 let concurrency = 2 // numero máximo de peticiones
 
@@ -82,11 +78,8 @@ try {
 
 			var config = {
 				method: 'get',
-
 				url: `https://www.wyylde.com/rest/mc/${USER}/album/${url_id}?nocache=1677227835635&version=4.1.0`,
-
 				headers: headers
-
 			}
 
 			axios(config)
@@ -115,15 +108,6 @@ try {
 							} else {
 								console.log(data)
 							}
-						})
-					}
-					else if (video) {
-						video.map(items => {
-							const play = items.play
-							const after = play.split('?')[0]
-
-							console.log(after)
-							writeStream.write(`${after}\n`)
 						})
 					}
 				})
