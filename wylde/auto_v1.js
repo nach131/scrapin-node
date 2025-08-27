@@ -6,11 +6,6 @@ const fs = require('fs-extra')
 
 require('dotenv').config()
 
-
-// 1918771  nubia
-// 1959181
-// 2508875
-
 const headers = {
 	'authority': 'www.wyylde.com',
 	'accept': 'application/json, text/plain, */*',

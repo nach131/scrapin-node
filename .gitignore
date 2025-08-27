@@ -30,3 +30,5 @@ yarn-error.log*
 *.json
 *.png
 /wylde/X_LIVE/venv
+
+.venv
