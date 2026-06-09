@@ -77,29 +77,44 @@ with open("content.json", "w", encoding="utf-8") as f:
     json.dump(content, f, ensure_ascii=False, indent=4)
 
 albums = []
+pictures_root = []
 
 for item in content:
-    # Ignorar cosas raras tipo {"type": "private_content"}
     if not isinstance(item, dict):
         continue
 
-    # Solo queremos álbumes
-    if item.get("type") != "album":
+    item_type = item.get("type")
+
+    # 🔹 Guardar imágenes directas (fuera de álbum)
+    if item_type == "picture":
+        img_url = item.get("properties", {}).get("full")
+        if img_url:
+            pictures_root.append({"id": item.get("id"), "url": img_url})
         continue
 
-    album_id = item.get("id")
-    title = item.get("title", "")
+    # 🔹 Guardar álbumes
+    if item_type == "album":
+        album_id = item.get("id")
+        title = item.get("title", "")
 
-    # Si tiene parent_album, usar ese ID
-    parent = item.get("parent_album")
-    if parent and isinstance(parent, dict):
-        parent_id = parent.get("id")
-        if parent_id:
-            album_id = parent_id
+        parent = item.get("parent_album")
+        if parent and isinstance(parent, dict):
+            parent_id = parent.get("id")
+            if parent_id:
+                album_id = parent_id
 
-    albums.append({"id": album_id, "title": title})
+        albums.append({"id": album_id, "title": title})
 
-# print(albums)
+root_dir = os.path.join(BASE_DIR, "0")
+os.makedirs(root_dir, exist_ok=True)
+
+print(f"Descargando {len(pictures_root)} imágenes root...")
+
+
+def download_root(pic):
+    filename = f"{pic['id']}.jpg"
+    filepath = os.path.join(root_dir, filename)
+    download_file(pic["url"], filepath)
 
 
 # Procesar álbumes descarga fotos
@@ -113,8 +128,8 @@ def process_album(album):
     # Nombre seguro de carpeta
     if album_name:
         safe_name = "".join(c for c in album_name if c.isalnum() or c in " _-").strip()
-        # album_dir_name = f"{url_id}#{safe_name}"
-        album_dir_name = f"{safe_name}"
+        album_dir_name = f"{url_id}#{safe_name}"
+        # album_dir_name = f"{safe_name}"
     else:
         album_dir_name = url_id
 
@@ -283,6 +298,10 @@ def process_videos(album):
 
 # //=========================================================================
 # Ejecutar con concurrencia
+
+with ThreadPoolExecutor(max_workers=5) as executor:
+    executor.map(download_root, pictures_root)
+
 with ThreadPoolExecutor(max_workers=2) as executor:
     executor.map(process_album, albums)
 
